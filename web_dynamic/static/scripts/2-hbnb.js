@@ -1,4 +1,13 @@
 $(document).ready(function () {
+    const url = `${window.location.origin}/api/v1/status/`;
+    $.get(url, (res) => {
+        if (res.status === 'OK') {
+            $('DIV#api_status').addClass('available');
+        } else {
+            $('DIV#api_status').removeClass('available');
+        }
+    });
+
     let checked = {};
     $('input[type="checkbox"]').click(function () {
         if ($(this).prop("checked") == true) {
@@ -12,13 +21,6 @@ $(document).ready(function () {
         }
         else {
             $('.amenities h4').html('&nbsp;');
-        }
-    });
-    $.get('http://0.0.0.0:5001/api/v1/status/', (res) => {
-        if (res.status === 'OK') {
-            $('#api_status').addClass('available');
-        } else {
-            $('#api_status').removeClass('available');
         }
     });
 });
